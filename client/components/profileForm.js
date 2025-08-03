@@ -42,7 +42,7 @@ export default function ProfileForm() {
       initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={(values) => {console.log(values);}}>
-      {({ handleChange, handleBlur, handleSubmit, values, errors, touched , isValid }) => (
+      {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched , isValid }) => (
         <>
         <Input
           name="email"
@@ -89,8 +89,8 @@ export default function ProfileForm() {
         <CheckBox
           title="أنا طبيب"
           name="userType"
-            checked={values.userType}
-            onPress={() => handleChange('userType')(!values.userType)}
+          checked={values.userType}
+          onPress={() => setFieldValue('userType', !values.userType)}
         />
         {values.userType && (
         <>
