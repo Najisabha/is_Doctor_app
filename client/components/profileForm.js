@@ -2,58 +2,36 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Input, CheckBox , Text, Button } from 'react-native-elements';
 
-export default function RegisterForm() {
+export default function ProfileForm() {
   const initialValues = {
     name: '',
     email: '',
     password: '',
-    confirmPassword: '',
-    phoneNumber: '',
+    phone: '',
     userType: false,
     specialization: '',
     workingHours: '',
-    location: ''
+    location: '',
+    latitude: '',
+    longitude: ''
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('الاسم الكامل مطلوب'),
     email: Yup.string().email('البريد الإلكتروني غير صالح').required('البريد الإلكتروني مطلوب'),
     password: Yup.string().min(6, 'كلمة المرور يجب أن تكون على الأقل 6 أحرف').required('كلمة المرور مطلوبة'),
-    confirmPassword: Yup.string()
-      .oneOf([Yup.ref('password'), null], 'كلمة المرور غير متطابقة')
-      .required('تأكيد كلمة المرور مطلوب'),
-    phoneNumber: Yup.string().required('رقم الهاتف مطلوب'),
+    phone: Yup.string().required('رقم الهاتف مطلوب'),
+    userType: Yup.boolean(),
+    specialization: Yup.string().when('userType', {
+      is: true,
+      then: Yup.string().required('التخصص مطلوب')
+    }),
+    workingHours: Yup.string().when('userType', {
+      is: true,
+        then: Yup.string().required('ساعات العمل مطلوبة')
+    }),
+    location: Yup.string().required('الموقع مطلوب'),
   });
-
-  const handleFormSubmit = (values) => {
-    const payload = {
-      name: values.name,
-      email: values.email,
-      password: values.password,
-      phoneNumber: values.phoneNumber,
-      userType: values.userType ? 'doctor' : 'normal',
-      workingHours: values.workingHours,
-      address: values.location,
-      // specialization: values.specialization // إذا أضفته في الـ DB استعمله هنا
-    };
-
-    console.log('Payload to Send:', payload);
-
-    // إرسال البيانات للسيرفر
-    fetch('http://YOUR_SERVER_IP/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Server Response:', data);
-      // هنا يمكنك نقل المستخدم لصفحة أخرى أو عرض رسالة نجاح
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-  };
 
   return (
     <Formik
@@ -62,6 +40,15 @@ export default function RegisterForm() {
       onSubmit={(values) => {console.log(values);}}>
       {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched , isValid }) => (
         <>
+        <Input
+          name="name"
+          placeholder="الاسم الكامل"
+          values={values.name}
+            onChangeText={handleChange('name')}
+            onBlur={handleBlur('name')}
+        />
+        {errors.name && touched.name && <Text style={{ color: 'red' }}>{errors.name}</Text>}
+
         <Input
           name="email"
           placeholder="البريد الإلكتروني"
@@ -79,23 +66,6 @@ export default function RegisterForm() {
             onBlur={handleBlur('password')}
         />
         {errors.password && touched.password && <Text style={{ color: 'red' }}>{errors.password}</Text>}
-        <Input
-          name="confirmPassword"
-          placeholder="تأكيد كلمة المرور"
-          values={values.confirmPassword}
-          secureTextEntry
-            onChangeText={handleChange('confirmPassword')}
-            onBlur={handleBlur('confirmPassword')}
-        />
-        {errors.confirmPassword && touched.confirmPassword && <Text style={{ color: 'red' }}>{errors.confirmPassword}</Text>}
-        <Input
-          name="fullName"
-          placeholder="الاسم الكامل"
-          values={values.fullName}
-            onChangeText={handleChange('fullName')}
-            onBlur={handleBlur('fullName')}
-        />
-        {errors.fullName && touched.fullName && <Text style={{ color: 'red' }}>{errors.fullName}</Text>}
         <Input
           name="phone"
           placeholder="رقم الهاتف"
