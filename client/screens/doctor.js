@@ -6,18 +6,6 @@ import { ScrollView } from 'react-native-web';
 export default function doctorScreen() {
   return (
     <ScrollView>
-        <View style={styles.container}>
-            <Text> صفحة الأطباء </Text>
-            <Button
-                title="صفحة الرئيسية"
-                onPress={() => navigation.navigate('home')}
-            />
-            <Button
-                title="تسجيل الدخول"
-                onPress={() => navigation.navigate('signup')}
-                style={{ marginTop: 20 }}
-            />
-        </View>
     </ScrollView>
   );
 }

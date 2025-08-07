@@ -32,7 +32,6 @@ export default function ProfileForm() {
     }),
     location: Yup.string().required('الموقع مطلوب'),
   });
-
   return (
     <Formik
       initialValues={initialValues}
