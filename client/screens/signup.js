@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, StyleSheet, View, Text, KeyboardAvoidingView , Button } from 'react-native';
+import { ScrollView, StyleSheet, View, Text, KeyboardAvoidingView, Button } from 'react-native';
 import { Input, CheckBox } from 'react-native-elements';
 import ProfileForm from '../components/profileForm';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -16,9 +16,13 @@ export default function SignUpScreen(props) {
           <Icon name="user" size={50} color="#f50" />
           <Text style={localStyles.title}>تسجيل حساب جديد</Text>
         </View>
+
         {/* نموذج تسجيل الحساب */}
-        <ProfileForm />
-        
+        <KeyboardAvoidingView behavior="padding" style={{ width: '100%' }} enabled>
+          <View style={styles.formContainer}>
+            <ProfileForm />
+          </View>
+        </KeyboardAvoidingView>
       </ScrollView>
     </KeyboardAvoidingView>
   );
