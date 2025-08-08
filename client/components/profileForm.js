@@ -36,7 +36,7 @@ export default function ProfileForm() {
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => {console.log(values);}}>
+      onSubmit={(values) => {props.submit(values);}}>
       {({ handleChange, handleBlur, handleSubmit, setFieldValue, values, errors, touched , isValid }) => (
         <>
         <Input
