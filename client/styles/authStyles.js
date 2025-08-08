@@ -1,38 +1,46 @@
-// // styles/authStyles.js
+import { StyleSheet } from 'react-native';
 
-// import { StyleSheet } from 'react-native';
+const styles = StyleSheet.create({
+   container: {
+       flex: 1,
+       justifyContent: 'center',
+       direction: 'rtl',
+       alignItems: 'center',
+       marginTop: '50px'
+   },
+   checkBoxContainer: {
+       flexDirection: 'row-reverse',
+   },
+   checkbox: {
+       border: 'none',
+       backgroundColor: 'transparent',
+       direction: 'rtl'
+   },
+   icon: {
+    fontSize: '25px'
+   },
+   textInput: {
+    height: 40,
+    width: '100%',
+    direction: 'rtl',
+    textAlign: 'right'
+  },
+  errorInput: {
+    border: '1px solid red',
+    borderRadius: 5,
+  },
+  textError: {
+    textAlign: 'right',
+    fontSize: 12, 
+    color: 'red',
+    marginBottom: 10
+  },
+  mapContainer: {
+    height: 200, marginTop: 20, width: '90%'
+  },
+  map : {
+    flex: 1,
+  }
+});
 
-// const styles = StyleSheet.create({
-//   container: {
-//     padding: 20,
-//     paddingBottom: 40,
-//     flexGrow: 1,
-//     justifyContent: 'center',
-//     backgroundColor: '#fff',
-//   },
-//   input: {
-//     marginBottom: 15,
-//   },
-//   buttonContainer: {
-//     marginTop: 20,
-//     alignItems: 'center',
-//   },
-//   button: {
-//     backgroundColor: '#f50',
-//     paddingVertical: 12,
-//     paddingHorizontal: 25,
-//     borderRadius: 8,
-//     width: '100%',
-//   },
-//   linkContainer: {
-//     marginTop: 15,
-//     alignItems: 'center',
-//   },
-//   linkText: {
-//     color: '#007bff',
-//     textDecorationLine: 'underline',
-//     marginTop: 10,
-//   },
-// });
-
-// export default styles;
+export default styles;
